@@ -1,0 +1,240 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<ExamModel>
+@{
+    var numble = 0;
+    ViewData["Question"] = Model[0].Question;
+    ViewData["QClass"] = Model[0].QClass.Class;
+    ViewData["AnswerA"] = Model[0].AnswerA;
+    ViewData["AnswerB"] = Model[0].AnswerB;
+    ViewData["AnswerC"] = Model[0].AnswerC;
+    ViewData["AnswerD"] = Model[0].AnswerD;
+    ViewData["Multiple"] = Model[0].Multiple;
+
+}
+@using word_company.Models;
+
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" charset="utf-8" http-equiv="content-type" />
+    <title>
+    </title>
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script >
+        var list = new Array();
+        var numble = 0;
+        var formdata = new FormData();
+        var max = -1;
+        var str = "";
+        @foreach(var a in Model)
+        {
+            var s = a.Id.ToString() + "%%%," + a.QClass.Class.ToString() + "%%%," + a.Question.ToString() + "%%%," + a.AnswerA.ToString() + "%%%," + a.AnswerB.ToString() + "%%%," + a.AnswerC.ToString() + "%%%," + a.AnswerD.ToString() + "%%%," + a.Multiple.ToString() + "%%%," + a.Answer.ToString();
+            @:list.push("@s");
+            @:max++;
+        }
+        change();
+        $(document).ready(function () {
+            $("#answer_text").hide();
+            $("#next").hide();
+            $("#prev").hide();
+            $("#updata").hide();
+
+            $("#next").click(function () {
+                if (numble >= max ) {
+                    alert("已到最后一题");
+                    $("#updata").show();
+                } else {
+                    save();
+                    numble++;
+                    change();
+                }
+            });
+            $("#prev").click(function () {
+                if (numble == 0) {
+                    alert("已到最前一题");
+                } else {
+                    save();
+                    numble--;
+                    change();
+                }
+            });
+            $("#updata").click(function () {
+                save();
+                formdata.set("all", numble);
+                var xhr = new XMLHttpRequest();
+                xhr.open("post", "/Exam/Exam/",false);
+                xhr.send(formdata);
+                alert(xhr.response);
+                
+                window.location = "/Exam/ExamResult/";
+                
+                //$.ajax({
+                //    type: 'post',
+                //    url: "/Exam/Exam/",
+                //    data: formdata,
+                //    contentType: false,
+                //    processData:false,
+                //})
+            })
+            $("#start").click(function () {
+                
+                $("#answer_text").show();
+                $("#start").hide();
+                $("#next").show();
+                $("#prev").show();
+                change();
+            })
+        });
+        function change() {
+
+            var m = list[numble];
+            var sss = String(utf(m));
+            var arr = sss.split("%%%,");
+            $("#question").text(function () {
+                return String(numble + 1) + "、" + arr[2] + "(" + arr[1] + ismut(arr[7])  +")" ;
+            });
+            $("#answera").text(function () {
+                return arr[3];
+             });
+             $("#answerb").text(function () {
+                 return arr[4];
+             });
+             $("#answerc").text(function () {
+                 return arr[5];
+             });
+             $("#answerd").text(function () {
+                 return arr[6];
+             });
+            $("#answer").html(function () {
+                if (arr[7] == "True") {
+                    return "<td id=\"answer\"><input type =\"checkbox\" Name=\"Ans\"   Id=\"AnsA" 
+                        + numble +
+                        "\"/>A<input type=\"checkbox\" Name=\"Ans\"  Id=\"AnsB"
+                        + numble +
+                        "\" />B<input type=\"checkbox\" Name=\"Ans\"  Id=\"AnsC"
+                        + numble +
+                        "\" />C<input type=\"checkbox\" Name=\"Ans\" Id=\"AnsD"
+                        + numble + "\"/>D</td>";
+;
+                } else {
+                    return "<td id=\"answer\"><input type =\"radio\" Name=\"Ans\" Id=\"AnsA"
+                        + numble +
+                        "\"/>A<input type=\"radio\" Name=\"Ans\" Id=\"AnsB"
+                        + numble +
+                        "\" />B<input type=\"radio\" Name=\"Ans\" Id=\"AnsC"
+                        + numble +
+                        "\" />C<input type=\"radio\" Name=\"Ans\" Id=\"AnsD"
+                        + numble + "\"/>D</td>";
+
+                }
+            });
+        }
+        
+        function utf( a ) {
+            var x = eval("'" + a.replace(/&#x(.*?);/g, "\\u$1") + "'");
+            return x;
+        }
+        function ismut(a) {
+            if (a == "False") {
+                return "单选";
+            } else {
+                return "多选";
+            }
+        }
+        function save(a) {
+            var m = list[numble];
+            var sss = String(utf(m));
+            var arr = sss.split("%%%,");
+            var anss = "";
+            if ($("#AnsA" +numble ).prop("checked") == true ) {
+                anss += "A";
+            }
+            if ($("#AnsB" + numble).prop("checked") == true ) {
+                anss += "B";
+            }
+            if ($("#AnsC" + numble).prop("checked") == true ) {
+                anss += "C";
+            }
+            if ($("#AnsD" + numble).prop("checked") == true ) {
+                anss += "D";
+            }
+
+            anss +=("%%%,"   +  arr[0]);
+            formdata.set("Ans" + numble,anss );
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <button id="start" >开始考试</button>
+        <table id="answer_text">
+            <tr>
+                <td id="question" colspan="2">
+                    @*@(numble+1) 、 @ViewData["Question"] (@ViewData["QClass"])*@
+                </td>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td id="answera">
+                    @*@ViewData["AnswerA"]*@
+                </td>
+
+            </tr>
+            <tr>
+                <td>B</td>
+                <td id="answerb">
+                    @*@ViewData["AnswerB"]*@
+                </td>
+
+            </tr>
+            <tr>
+                <td>C</td>
+                <td id="answerc">
+                    @*@ViewData["AnswerC"]*@
+                </td>
+
+            </tr>
+            <tr>
+                <td>D</td>
+                <td id="answerd">
+                    @*@ViewData["AnswerD"]*@
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2"  >
+                    答案：
+                </td>
+
+            </tr>
+            <tr>
+                <td id="answer">
+                    @*1*@
+                </td>
+            </tr>
+
+
+        </table>
+
+        <button id="next" >下一题</button>
+        <button id="prev" >上一题</button>
+        <button type="submit" id="updata" >提交</button>
+
+        
+
+
+
+</body>
+
+</html>

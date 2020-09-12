@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@inject word_company.Services.IExamService examservice
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" />
+    <title>
+    </title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript">
+ }
+        $(document).ready(function () {
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <form>
+        <table>
+            <tr>
+                <th>
+                    <b>考试方式</b>
+                </th>
+                <th>
+                    <b>开始考试</b>
+                </th>
+                @*<th>
+                <b>历史记录</b>
+            </th>*@
+            </tr>
+            @foreach (var a in examservice.GetAllQClasses())
+            {
+                <tr>
+                    <td>@a.Class</td>
+                    <td><button asp-action="Exam" asp-route-id="@a.Id" asp-route-type="0">开始考试</button></td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    初级
+                </td>
+                <td>
+                    <button asp-action="Exam" asp-route-type="1">开始考试</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    中级
+                </td>
+                <td>
+                    <button asp-action="Exam" asp-route-type="2">开始考试</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    高级
+                </td>
+                <td>
+                    <button asp-action="Exam" asp-route-type="3">开始考试</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    
+</body>
+
+</html>

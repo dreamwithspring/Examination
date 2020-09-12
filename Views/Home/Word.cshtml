@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+
+@model word_company.Models.personnel_word
+
+    <h1>姓名:@Model.UserModel.UserName</h1>
+    <h1>文档名:@Model.TName</h1>
+@foreach(var w in Model.Text.Split())
+{
+    <p>@w</p>
+}
+@*<text>@Model.Text</text>*@

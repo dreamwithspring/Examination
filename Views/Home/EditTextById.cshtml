@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+@model word_company.Models.personnel_word
+
+<!doctype html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html" ; charset="utf-8" />
+    <title>修改文档</title>
+    <style type="text/css">
+        
+
+        textarea.input_box {
+            height: 600px;
+            width: 1200px;
+        }
+
+        button.up_button {
+            align-content: center;
+        }
+    </style>
+    <script>
+
+
+        $(Document).ready(function () {
+            $("#btn").click(function () {
+                window.history.back();
+            });
+        });
+    </script>
+</head>
+
+
+<body>
+
+
+    
+
+
+    
+        @*<tr>
+                <td><label asp-for="Name"></label></td>
+                <td><h1 placeholder="姓名">@Model.Name</h1></td>
+                <td><span asp-validation-for="Name"></span></td>
+                <td><h1><a asp-action="AllWordFindByName" asp-route-name="@Model.Name">取消</a></h1></td>
+            </tr>*@
+        <form method="post" enctype="application/x-www-form-urlencoded">
+            <button id="btn">返回</button>
+            <table>
+                <tr>
+                    <td><label asp-for="TName"></label></td>
+                    <td><input asp-for="TName" placeholder="文档名" /></td>
+                    <td><span asp-validation-for="TName"></span></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label asp-for="Text"></label></td>
+                    @*<td><input  type="text"  asp-for="Text"   /></td>*@
+                    <td><textarea asp-for="Text" class="input_box" placeholder="文档内容"></textarea></td>
+                    <td><span asp-validation-for="Text"></span></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" name="save" formenctype="application/x-www-form-urlencoded" onclick="return confirm('确定修改？') " />提交</td>
+                </tr>
+
+            </table>
+        </form>
+
+    
+
+
+</body>
+
+
+
+</html>

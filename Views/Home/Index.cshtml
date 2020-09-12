@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+    string WNAME = null;
+    string UNAME = null;
+}
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+
+@*@model List<string>;*@
+@*@model List<string>*@
+@model IEnumerable<UserModel>
+
+
+<!doctype html>
+<html>
+<head>
+    <title>全员</title>
+    <style>
+        li.edit_text {
+            height: 50px;
+            width: 200px;
+        }
+
+        td.edit_text {
+            height: 50px;
+            width: 200px;
+            align-content: center;
+            text-align: center;
+        }
+        .th{
+            width: 200px;
+            text-align:center;
+        }
+        .td{
+            width:200px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <table border="1" align="center" style="border-color:black;align-content:center;">
+            <tr>
+                @*<td class="edit_text"><a asp-action="Login" asp-controller="User"><h1>登录</h1></a></td>*@
+                <td class="edit_text"><a asp-action="SignUp" asp-controller="User" target="_blank"><h1>添加用户</h1></a></td>
+                <td class="edit_text"><a asp-action="AddUser" asp-controller="User" target="_blank"><h1>添加多个用户</h1></a></td>
+                <td class="edit_text"><a asp-action="Index" asp-controller="Exam" target="_blank"><h1>题库操作</h1></a></td>
+                <td class="edit_text"><a asp-action="Logout" asp-controller="User"><h1>登出</h1></a></td>
+
+            </tr>
+        </table>
+        @*<ul>
+                <li class="edit_text"><a asp-action="AddText">添加文档</a></li>
+                <li class="edit_text"><a asp-action="EditText">修改文档</a></li>
+                <li class="edit_text"><a asp-action="WordFindById">查找文档</a></li>
+            </ul>*@
+
+    </nav>
+    <hr />
+
+
+
+    @*<form asp-action="WordFindById"  method="get">
+
+            <input placeholder="姓名" name = "name"  />
+
+            <input placeholder="文档名" name  ="tname" />
+
+
+
+
+            <button type="submit" onclick="return confirm('确认查询？')">查询</button>
+        </form>*@
+
+
+
+
+
+
+
+    @*<a href="home/WordFindById?id=胡磊&&name=yz约单">文档</a>*@
+<table>
+    <tr>
+        <th class="th">用户名</th>
+        <th>查看文档</th>
+        <th>重置密码</th>
+        <th>修改</th>
+        <th>删除</th>
+
+    </tr>
+    @foreach (var s in Model)
+    {
+<tr>
+    <td class="td"><b style="color:red;text-align:center;" >@s.UserName</b></td>
+    <form method="get" enctype="application/x-www-form-urlencoded">
+        <td class="td"><button asp-action="AllWordFindByUser" asp-route-Id="@s.Id" style="color:red" >查看文档</button></td>
+        <td><button asp-action="ReSetPassWord" asp-route-Id="@s.Id" style="color:red">重置密码</button></td>
+        <td><button asp-action="EditUser" asp-controller="User" asp-route-Id="@s.Id" onclick="return confirm('确定要对该用户进行修改？')">修改用户</button></td>
+        <td><button asp-action="DeleteUser" asp-controller="User" asp-route-Id="@s.Id" onclick="return confirm('确定删除？\n只有超级管理员才有删除权限\n删除后也会删除该用户所有文档。')">删除用户</button></td>
+        </form>
+</tr>
+    }
+</table>
+
+</body>
+</html>

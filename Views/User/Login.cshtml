@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    
+}
+@model LoginViewModel
+
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" />
+    <title>
+    </title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript"> }
+        $(document).ready(function () {
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <form method="post" name="">
+        <div class="form-group row">
+            <label asp-for="User" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input class="form-control" id="Login_UserName" asp-for="User" />
+                <span class="invalid-feedback" asp-validation-for="User"></span>
+            </div>
+        </div>
+        @*<div class="form-group row">
+            <label asp-for="UserName" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input class="form-control" id="Login_UserName" asp-for="UserName" />
+                <span class="invalid-feedback" asp-validation-for="UserName"></span>
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <label asp-for="PassWord" class="col-sm-2"></label>
+            <div class="col-sm-10">
+                <input class="form-control" id="Login_PassWord" asp-for="PassWord" />
+                <span class="invalid-feedback" asp-validation-for="PassWord"></span>
+            </div>
+        </div>
+        <div class="invalid-feedback" asp-validation-summary="ModelOnly">
+        </div>
+        <button type="submit" class="btn btn-primary" id="Login_LoginButton">登录</button>
+
+    </form>
+    <a asp-action="SignUp">注册</a>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+@model UserModel
+<head>
+    <title>全员</title>
+    <style>
+        li.edit_text {
+            height: 50px;
+            width: 200px;
+        }
+
+        td.edit_text {
+            width: 200px;
+            align-content: center;
+        }
+    </style>
+</head>
+<table>
+    <tr>
+        <td>
+            <a asp-action="index"><h1>桌面</h1></a>
+        </td>
+        <td>
+            <a asp-action="ExamSelect" asp-controller="Exam"><h1>考试</h1></a>
+        </td>
+        <td>
+            <a asp-action="Logout" asp-controller="User" asp-route-id="@Model.Id"><h1>登出</h1></a>
+        </td>
+    </tr>
+</table>
+
+
+
+<hr />
+<form method="get">
+    <button asp-action="AddTextById" asp-route-Id="@Model.Id"><h1>添加文档</h1></button>
+</form>
+<table>
+    <tr>
+        <th style="width:200px">文档名</th>
+        <th>修改</th>
+        <th>删除</th>
+        @*<th>添加</th>*@
+    </tr>
+    @{
+        if (Model.personnel_Words != null)
+        {
+            @foreach (var p in Model.personnel_Words)
+            {
+                <tr>
+                    <td><a style="align-items:center;width:auto;" asp-action="FindWordById" asp-route-Id="@p.Id">@p.TName</a></td>
+                    <form method="get">
+                        <td><button asp-action="EditTextById" asp-route-id="@p.Id">修改</button></td>
+                        <td><button asp-action="DeleteWordById" asp-route-id="@p.Id" onclick="return confirm('确定删除？\n删除后不可恢复')">删除</button></td>
+                        @*<td><button asp-action="AddText" asp-route-id="@p.UserModel" >添加</button></td>*@
+                    </form>
+                </tr>
+            }
+        }
+    }
+
+</table>

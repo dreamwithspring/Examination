@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<ExamModel>
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" />
+    <title>
+    </title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        })
+
+    </script>
+
+
+</head>
+
+<body>
+    <nav>
+        <form>
+            <table>
+                <tr>
+                    <td><button asp-action="Index" asp-controller="Home">桌面</button></td>
+                    <td><button asp-action="Logout" asp-controller="User">登出</button></td>
+                </tr>
+            </table>
+
+        </form>
+    </nav>
+    <form method="get">
+        <table>
+            <tr>
+                <th>题目简介</th>
+                <th>是否多选</th>
+                <th>修改题目</th>
+                <th>删除题目</th>
+            </tr>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                <tr>
+                    <td><b>@a.Validity</b></td>
+                    @if (a.Multiple)
+                    {
+                        <td>多选</td>
+                    }
+                    else
+                    {
+                        <td>单选</td>
+                    }
+                    <td><button asp-action="EditExamModel" asp-route-Id="@a.Id">修改题目</button></td>
+                    <td><button asp-action="DeleteExamModel" asp-route-Id="@a.Id">删除删除题目</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+
+
+</body>
+
+</html>

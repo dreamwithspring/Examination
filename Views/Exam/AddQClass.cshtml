@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model QClass
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" />
+    <title>
+    </title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript">
+ }
+        $(document).ready(function () {
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <form>
+        <table>
+            <tr>
+                <td><button asp-action="Index" asp-controller="Exam">取消添加</button></td>
+            </tr>
+        </table>
+    </form>
+    <form method="post" name="">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Class"></label>
+                </td>
+                <td>
+                    <input asp-for="Class" />
+                </td>
+                <td>
+                    <span asp-validation-for="Class"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Explain"></label>
+                </td>
+                <td>
+                    <input asp-for="Explain" />
+                </td>
+                <td>
+                    <span asp-validation-for="Explain"></span>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary" id="Login_LoginButton">提交</button>
+
+    </form>
+
+</body>
+
+</html>

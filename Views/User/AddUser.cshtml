@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.AspNetCore.Html
+@{
+}
+@model List<AddUserModel>
+
+<!doctype html>
+
+<html>
+<head>
+    <meta lang="zh-cn" name="viewport" content="width = device - width" />
+    <title>添加用户</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+
+        $(Document).ready(function () {
+            var a = 0;
+            var x = "";
+            $("#add").click(function () {
+
+                $("#AddUser").after(
+                    "<tr><td><input name= \"["
+                    + a +
+                    "].User\"   placeholder = \"用户名\" required=\"required\" value =\"\" /></td ><td><input name= \"["
+                    + a +
+                    "].UserName\" placeholder = \"姓名\"  required=\"required\" /></td ><td><select name=\"["
+                    + a +
+                    "].Role\" ><option value=\"user\">普通用户</option><option value=\"admin\">管理员</option></select></td></tr>"
+                );
+                a++;
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <button asp-action="index" asp-controller="Home">返回</button>
+    </form>
+    
+    <button id="add">增加</button>
+    <form method="post" asp-action="AddUser">
+        <table>
+            <tr>
+                <th>用户名</th>
+                <th>姓名</th>
+                <th>权限</th>
+            </tr>
+            <tr id="AddUser"></tr>
+            @*<tr>
+                    <td>
+                        <input asp-for="@Model[8].User" placeholder="用户名" required="required" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model[8].UserName" placeholder="用户名" required="required" />
+                    </td>
+                    <td>
+                        <select asp-for="@Model[8].Role" >
+                            <option value="user">普通用户</option>
+                            <option value="admin">管理员</option>
+                        </select>
+                    </td>
+                </tr>*@
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+
+</html>
+
+

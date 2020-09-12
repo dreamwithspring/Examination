@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UserModel
+
+<!doctype html>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width = device - width" />
+    <title>
+    </title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript">
+ }
+        $(document).ready(function () {
+
+
+        })
+    </script>
+    <style>
+        .tr{
+            height: 80px;
+        }
+        .input{
+            height:25px;
+            width:200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="post">
+        <table>
+            <tr class="tr">
+                <th>
+                    <label asp-for="User"></label>
+                </th>
+                <th>
+                    <label asp-for="UserName"></label>
+                </th>
+                <th>
+                    <label asp-for="PassWord"></label>
+                </th>
+                <th>
+                    <label asp-for="Role"></label>
+                </th>
+            </tr>
+            <tr class="tr">
+                <td>
+                    <input class="input"  asp-for="User" value="@Model.User" readonly="readonly">
+                </td>
+                <td>
+                    <input class="input" id="Login_UserName" asp-for="UserName"  value="@Model.UserName"/>
+                </td>
+                <td>
+                    <input class="input"  id="Login_PassWord" asp-for="PassWord"  value="@Model.PassWord"/>
+                </td>
+                <td>
+                    <select asp-for="Role">
+                        <option value="user">用户</option>
+                        <option value="admin">管理员</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="tr">
+                <td>
+                    <span asp-validation-for="User"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="UserName"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="PassWord"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="Role"></span>
+                </td>
+            </tr>
+        </table>
+        <div  asp-validation-summary="ModelOnly">
+        </div>
+        <button type="submit"  id="Login_LoginButton">提交</button>
+
+    </form>
+
+</body>
+
+</html>

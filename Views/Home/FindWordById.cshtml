@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+    <meta lang="zh-cn" />
+    <title>文档</title>
+    <style type="text/css">
+        .td{
+            width: 200px;
+            height:30px;
+        }
+    </style>
+</head>
+
+</html>
+
+
+@model personnel_word
+<table>
+    <tr>
+        <td class="td"><a asp-action="index"><h1>桌面</h1></a></td>
+        <td class="td"><a asp-action="Logout" asp-controller="User"><h1>登出</h1></a></td>
+        <td class="td"><a asp-action="EditTextById" asp-route-Id="@Model.Id"><h1>修改</h1></a></td>
+    </tr>
+</table>
+<h1>姓名:@Model.UserModel.UserName</h1>
+<h1>文档名:@Model.TName</h1>
+@foreach (var w in Model.Text.Split())
+{
+    <p style="font-size:18px">@w</p>
+}

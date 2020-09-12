@@ -1,0 +1,159 @@
+﻿@using word_company.Models
+@inject word_company.Services.IExamService examservice
+@model ExamModel
+
+@{ 
+
+}
+
+<!doctype html>
+<html>
+<head>
+    <style>
+        textarea.input_box {
+            height: 100px;
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>单选</h1>
+    <form>
+        <table>
+            <tr>
+                <td><button asp-action="Index" asp-controller="Exam">取消添加</button></td>
+                <td><button asp-action="Logout" asp-controller="User">登出</button></td>
+            </tr>
+        </table>
+
+    </form>
+    <form method="post">
+        <table>
+            <tr>
+                <td>
+                    <label asp-for="Question"></label>
+                </td>
+                <td>
+                    <textarea asp-for="Question" class="input_box" placeholder="问题"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="Question"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Validity"></label>
+                </td>
+                <td>
+                    <input asp-for="Validity" />
+                </td>
+                <td>
+                    <span asp-validation-for="Validity"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Score"></label>
+                </td>
+                <td>
+                    <input asp-for="Score" type="radio" value="1" />1
+                    <input asp-for="Score" type="radio" value="2" />2
+                    <input asp-for="Score" type="radio" value="3" />3
+                    <input asp-for="Score" type="radio" value="4" />4
+                    <input asp-for="Score" type="radio" value="5" />5
+                </td>
+                <td>
+                    <span asp-validation-for="Score"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label asp-for="Difficulty"></label>
+                </td>
+                <td>
+
+                    <select asp-for="Difficulty">
+                        <option value="easy">非常简单（难度一）</option>
+                        <option value="easier">比较简单（难度二）</option>
+                        <option value="common">普通（难度三）</option>
+                        <option value="difficult">困难（难度四）</option>
+                        <option value="difficulty">非常困难（难度五）</option>
+                    </select>
+                </td>
+                <td>
+                    <span asp-validation-for="Difficulty"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="AnswerA"></label>
+                </td>
+                <td>
+                    <textarea asp-for="AnswerA" class="input_box" placeholder="答案A"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="AnswerA"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="AnswerB"></label>
+                </td>
+                <td>
+                    <textarea asp-for="AnswerB" class="input_box" placeholder="答案B"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="AnswerB"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="AnswerC"></label>
+                </td>
+                <td>
+                    <textarea asp-for="AnswerC" class="input_box" placeholder="答案C"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="AnswerC"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="AnswerD"></label>
+                </td>
+                <td>
+                    <textarea asp-for="AnswerD" class="input_box" placeholder="答案D"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="AnswerD"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Answer"></label>
+                </td>
+
+                <td>
+                    <input asp-for="Answer" type="radio" value="A" />A<input type="radio" value="B" asp-for="Answer" />B<input asp-for="Answer" type="radio" value="C" />C<input type="radio" value="D" asp-for="Answer" />D
+                </td>
+                <td>
+                    <span asp-validation-for="Answer"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Explain"></label>
+                </td>
+                <td>
+                    <textarea asp-for="Explain" class="input_box" placeholder="问题解释"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="Explain"></span>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">提交</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var i = 1;
+    string mul(bool a)
+    {
+        if (a)
+        {
+            return "多选";
+        }
+        else
+        {
+            return "单选";
+        }
+    }
+}
+
+
+@model List<ExamResultViewModel>
+
+
+<a asp-action="Index" asp-controller="User">返回主菜单</a>
+
+@foreach (var a in Model)
+{
+    <table>
+        <tr>
+            <td colspan="2">
+                @i @a.Question (@a.QClass.Class  @mul(a.Multiple))  @a.Score 分
+            </td>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>
+                @a.AnswerA
+            </td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>
+                @a.AnswerB
+            </td>
+        </tr>
+        <tr>
+            <td>C</td>
+            <td>
+                @a.AnswerC
+            </td>
+        </tr>
+        <tr>
+            <td>D</td>
+            <td>
+                @a.AnswerD
+            </td>
+        </tr>
+        <tr>
+            <td>您的答案</td>
+            <td>@a.Result</td>
+        </tr>
+        <tr>
+            <td>解析</td>
+            <td>@a.Explain</td>
+        </tr>
+    </table>
+    <hr />
+}
+
